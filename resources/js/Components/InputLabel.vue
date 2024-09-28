@@ -5,7 +5,8 @@ defineProps({
 </script>
 
 <template>
-    <label class="block font-medium text-sm text-gray-700 dark:text-gray-300">
+    <label data-tw-merge=""
+           class="inline-block mb-2 group-[.form-inline]:mb-2 group-[.form-inline]:sm:mb-0 group-[.form-inline]:sm:mr-5 group-[.form-inline]:sm:text-right">
         <span v-if="value">{{ value }}</span>
         <span v-else><slot /></span>
     </label>
