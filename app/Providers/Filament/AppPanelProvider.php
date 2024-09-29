@@ -49,7 +49,6 @@ class AppPanelProvider extends PanelProvider
                 'My space',
             ])
             ->plugins([
-                \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make()   ,
                 BreezyCore::make()
                     ->myProfile(
                         shouldRegisterNavigation: true,
