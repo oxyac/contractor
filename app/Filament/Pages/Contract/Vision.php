@@ -28,7 +28,6 @@ class Vision extends Page
 
     public function save()
     {
-dd($this->photo);
         $contract = new Contract();
         $contract->legal_entity_id = auth()->user()->legal_entity_id;
         $contract->save();
