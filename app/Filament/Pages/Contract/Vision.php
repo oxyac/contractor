@@ -41,6 +41,17 @@ class Vision extends Page
             /* @var Media $media */
             $contract->addMedia($photo)->toMediaCollection('default', 's3');
 
+            if(config('services.python.enabled')) {
+                ParseContracts::dispatch($contract);
+
+                Notification::make()
+                    ->title('Contract has been uploaded. Generation in progress')
+                    ->color('success')
+                    ->send();
+
+                return;
+            }
+
             $result = json_decode('{
    "companies": {
       "from": {
@@ -106,8 +117,6 @@ class Vision extends Page
 ', true);
 
             (new GenerateService())->generateFromResponse($contract, $result);
-
-//            ParseContracts::dispatchSync($contract);
 
             Notification::make()
                 ->title('Contract has been uploaded. Generation in progress')

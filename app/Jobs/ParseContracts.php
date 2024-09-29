@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-class ParseContracts
+class ParseContracts implements ShouldQueue
 {
     use Queueable;
 

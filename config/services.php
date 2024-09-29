@@ -31,7 +31,8 @@ return [
         ],
     ],
     'python' => [
-        'key' => env('PYTHON_API_KEY')
+        'key' => env('PYTHON_API_KEY'),
+        'enabled' => env('PYTHON_API_ENABLED', false),
     ],
 
 ];
