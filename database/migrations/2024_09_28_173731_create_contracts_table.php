@@ -34,16 +34,23 @@ return new class extends Migration
             $table->date('contract_due_date')->nullable();
             $table->decimal('total')->nullable();
             $table->text('notes')->nullable();
+            $table->boolean('is_parsed')->default(false);
 
             $table->boolean('is_limited')->default(false); // Whether the contract is a subscription
             $table->boolean('is_subscription')->default(false); // Whether the contract is a subscription
             $table->boolean('is_in_rates')->default(false); // Whether the cont
 
             $table->json('services')->nullable();
+            $table->json('parse_result')->nullable();
 
-            $table->foreignId('company_id')->constrained('companies'); // Foreign key to the company (nullable
+            $table->foreignId('legal_entity_id')->constrained('legal_entities'); // Foreign key to the company (nullable
 
             $table->timestamps();
+        });
+
+
+        Schema::table('users', function (Blueprint $table) {
+            $table->foreignId('legal_entity_id')->nullable()->constrained('legal_entities');
         });
     }
 
@@ -52,6 +59,10 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropForeign(['legal_entity_id']);
+            $table->dropColumn('legal_entity_id');
+        });
         Schema::dropIfExists('contracts');
     }
 };

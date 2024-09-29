@@ -22,15 +22,18 @@ class Contract extends Model implements HasMedia
         'contract_due_date',
         'total',
         'notes',
+        'is_parsed',
         'is_limited',
         'is_subscription',
         'is_in_rates',
     ];
     public $casts = [
         'services' => 'array',
+        'parse_result' => 'array',
         'contract_date' => 'date',
         'contract_start_date' => 'date',
         'contract_due_date' => 'date',
+        'is_parsed' => 'bool'
     ];
 
     public function fromEntity()

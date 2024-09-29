@@ -81,7 +81,9 @@ class LegalEntityResource extends Resource
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
-            ]);
+            ])->modifyQueryUsing(function (Builder $query) {
+                $query->where('id', '!=', 1);
+            });
     }
 
     public static function infolist(Infolists\Infolist $infolist): Infolists\Infolist

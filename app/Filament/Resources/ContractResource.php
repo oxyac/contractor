@@ -151,7 +151,7 @@ class ContractResource extends Resource
                 ]),
             ])->defaultSort('id', 'desc')->modifyQueryUsing(
                 function (Builder $query) {
-                    $query->where('company_id', auth()->user()->company_id);
+                    $query->where('legal_entity_id', auth()->user()->legal_entity_id);
                 }
             );
     }

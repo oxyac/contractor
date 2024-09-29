@@ -17,7 +17,7 @@ class Invoice extends Model
         'product_quantity',
         'product_price',
         'total',
-        'company_id'
+        'legal_entity_id'
     ];
 
     protected $casts = [

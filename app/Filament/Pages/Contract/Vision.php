@@ -35,13 +35,11 @@ class Vision extends Page
         foreach ($this->photos as $photo) {
 
             $contract = new Contract();
-            $contract->company_id = auth()->user()->company_id;
+            $contract->legal_entity_id = auth()->user()->legal_entity_id;
             $contract->save();
 
             /* @var Media $media */
-            $contract->addMedia($photo)->toMediaCollection('default', 'local');
-
-//            ParseContracts::dispatch($contract);
+            $contract->addMedia($photo)->toMediaCollection('default', 's3');
 
             $result = json_decode('{
    "companies": {
@@ -109,11 +107,14 @@ class Vision extends Page
 
             (new GenerateService())->generateFromResponse($contract, $result);
 
-        }
+//            ParseContracts::dispatchSync($contract);
 
-        Notification::make()
-            ->title('Contract has been uploaded.')
-            ->send();
+            Notification::make()
+                ->title('Contract has been uploaded. Generation in progress')
+                ->color('success')
+                ->send();
+
+        }
     }
 
 }

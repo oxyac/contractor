@@ -27,7 +27,7 @@ class User extends Authenticatable implements HasName
         'last_name',
         'email',
         'password',
-        'company_id'
+        'legal_entity_id'
     ];
 
     /**
@@ -53,9 +53,9 @@ class User extends Authenticatable implements HasName
         ];
     }
 
-    public function company(): HasOne
+    public function legalEntity(): BelongsTo
     {
-        return $this->hasOne(Company::class);
+        return $this->belongsTo(LegalEntity::class);
     }
 
     public function getFilamentName(): string

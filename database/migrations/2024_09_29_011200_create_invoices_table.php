@@ -21,7 +21,7 @@ return new class extends Migration
             $table->decimal('product_price'); // Price of the product/service
             $table->decimal('total'); // Total invoice price
 
-            $table->foreignId('company_id')->constrained('companies'); // Foreign key to the company (nullable
+            $table->foreignId('legal_entity_id')->constrained('legal_entities'); // Foreign key to the company (nullable
 
             $table->timestamps(); // Created at & Updated at
         });

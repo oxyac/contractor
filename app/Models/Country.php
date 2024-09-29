@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Country extends Model
 {
 
-    public function company()
+    public function legalEntity()
     {
-        return $this->belongsTo(Company::class);
+        return $this->belongsTo(LegalEntity::class);
     }
 }

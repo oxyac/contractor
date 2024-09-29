@@ -15,14 +15,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        Company::create([
-            'name' => 'Test Company',
+        LegalEntity::create([
+            'name' => 'Pro Accounting Firm',
         ]);
         User::factory()->create([
             'first_name' => 'Vasya',
             'last_name' => 'Pupkin',
             'email' => 'test@pupkin.com',
-            'company_id' => 1,
+            'legal_entity_id' => 1,
         ]);
 
 

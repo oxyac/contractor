@@ -29,7 +29,7 @@ class ContractFactory extends Factory
             'is_limited' => $this->faker->boolean,
             'is_subscription' => $this->faker->boolean,
             'is_in_rates' => $this->faker->boolean,
-            'company_id' => 1,
+            'legal_entity_id' => 1,
             'services' => [
                 0 => [
                     'name' => $this->faker->word,

@@ -22,7 +22,7 @@ class MyCompany extends Page implements HasForms
 
     public function mount(): void
     {
-        $this->form->fill(auth()->user()->company->toArray());
+        $this->form->fill(auth()->user()->legalEntity->toArray());
     }
 
     public function form(Form $form): Form
@@ -30,35 +30,26 @@ class MyCompany extends Page implements HasForms
         return $form->schema([
             Forms\Components\Section::make('Company Details')
                 ->schema(
-                    [Forms\Components\TextInput::make('name')
-                        ->label('Company Name')
-                        ->maxLength(255),
+                    [
+                        Forms\Components\TextInput::make('name')
+                                ->placeholder('Enter the name of the legal entity'),
+                        Forms\Components\TextInput::make('entity_type')
+                            ->placeholder('Enter the type of the legal entity'),
+                        Forms\Components\TextInput::make('iban')
+                            ->placeholder('Enter the IBAN of the legal entity'),
                         Forms\Components\TextInput::make('email')
-                            ->label('Company Email')
-                            ->email()
-                            ->maxLength(255),
-                        Forms\Components\TextInput::make('domain')
-                            ->maxLength(255),
-
-                        Forms\Components\TextInput::make('telephone_number')
-                            ->label('Telephone Number')
-                            ->tel()
-                            ->maxLength(255),
-                        Forms\Components\TextInput::make('address_line_1')
-                            ->maxLength(255),
-                        Forms\Components\TextInput::make('address_line_2')
-                            ->maxLength(255),
-                        Forms\Components\TextInput::make('city')
-                            ->maxLength(255),
-                        Forms\Components\TextInput::make('postcode')
-                            ->maxLength(255),
-                        Forms\Components\Select::make('country_id')
-                            ->relationship(name: 'country', titleAttribute: 'name')
-                            ->searchable()]
+                            ->placeholder('Enter the email of the legal entity'),
+                        Forms\Components\TextInput::make('phone')
+                            ->placeholder('Enter the phone of the legal entity'),
+                        Forms\Components\TextInput::make('address')
+                            ->placeholder('Enter the address of the legal entity'),
+                        Forms\Components\TextInput::make('bank_details')
+                            ->placeholder('Enter the bank details of the legal entity'),
+                    ]
                 )
                 ->columnSpan(2)
         ])->columns(3)
-            ->model(auth()->user()->company)
+            ->model(auth()->user()->legalEntity)
             ->statePath('data');
     }
 
