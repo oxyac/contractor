@@ -13,6 +13,7 @@
         "jeffgreco13/filament-breezy": "^2.4",
         "laravel/framework": "^11.0",
         "laravel/tinker": "^2.9",
+        "laravel/vapor-cli": "^1.65",
         "laravel/vapor-core": "^2.37",
         "league/flysystem-aws-s3-v3": "^3.0",
         "openai-php/laravel": "^0.10.1",
