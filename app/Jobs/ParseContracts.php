@@ -37,13 +37,18 @@ class ParseContracts implements ShouldQueue
                 'is_parsed' => true
             ]);
 
-            (new GenerateService())->generateFromResponse($this->contract, $result);
+            if(isset($result['result'])) {
 
-            Notification::make()
-                ->title('Contract has been generated.')
-                ->color('success')
-                ->send();
+                (new GenerateService())->generateFromResponse($this->contract, $result['result']);
 
+                Notification::make()
+                    ->title('Contract has been generated.')
+                    ->color('success')
+                    ->send();
+
+            } else {
+                Log::error('Error parsing contract.', $result);
+            }
         } catch (\Exception $e) {
             Notification::make()
                 ->title('Error parsing contract.')
