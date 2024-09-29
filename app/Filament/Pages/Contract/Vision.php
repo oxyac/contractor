@@ -28,10 +28,7 @@ class Vision extends Page
 
     public function save()
     {
-        $this->validate([
-            'photo' => 'required|max:10240',
-        ]);
-
+dd($this->photo);
         $contract = new Contract();
         $contract->legal_entity_id = auth()->user()->legal_entity_id;
         $contract->save();
