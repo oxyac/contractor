@@ -5,14 +5,14 @@ namespace App\Filament\Pages\Profile;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Form;
+use Filament\Notifications\Notification;
 use Filament\Pages\Page;
 use Filament\Forms;
-use Illuminate\Database\Eloquent\Model;
-use Squire\Models\Country;
 
 class MyCompany extends Page implements HasForms
 {
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
+    protected static ?string $navigationGroup = 'Settings';
 
     protected static string $view = 'filament.pages.profile.my-company';
 
@@ -22,7 +22,7 @@ class MyCompany extends Page implements HasForms
 
     public function mount(): void
     {
-        $this->form->fill();
+        $this->form->fill(auth()->user()->company->toArray());
     }
 
     public function form(Form $form): Form
@@ -50,13 +50,11 @@ class MyCompany extends Page implements HasForms
                             ->maxLength(255),
                         Forms\Components\TextInput::make('city')
                             ->maxLength(255),
-                        Forms\Components\TextInput::make('county')
-                            ->maxLength(255),
                         Forms\Components\TextInput::make('postcode')
                             ->maxLength(255),
                         Forms\Components\Select::make('country_id')
                             ->relationship(name: 'country', titleAttribute: 'name')
-                            ->default(Country::where('name', 'Moldova')->first()->id)]
+                            ->searchable()]
                 )
                 ->columnSpan(2)
         ])->columns(3)
@@ -66,13 +64,12 @@ class MyCompany extends Page implements HasForms
 
     public function submit()
     {
-        dd( $this->form->getState());
+        $this->form->model->update($this->form->getState());
 
-        $this->form->model->update(
-            $this->form->collect(),
-        );
-
-        $this->form->model->save();
+        Notification::make()
+            ->title('Saved successfully')
+            ->success()
+            ->send();
     }
 
 

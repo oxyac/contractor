@@ -24,6 +24,7 @@ return new class extends Migration {
             $table->string('address_line_1')->nullable();
             $table->string('address_line_2')->nullable();
             $table->string('city')->nullable();
+            $table->string('county')->nullable();
             $table->foreignId('country_id')->nullable();
             $table->string('postcode')->nullable();
 
@@ -40,6 +41,7 @@ return new class extends Migration {
     {
 
         Schema::dropIfExists('companies');
+        Schema::dropIfExists('legal_entities');
 
 
     }

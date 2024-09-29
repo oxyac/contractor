@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Contract extends Model implements HasMedia
+class Vision extends Model implements HasMedia
 {
     use HasFactory, InteractsWithMedia;
 }

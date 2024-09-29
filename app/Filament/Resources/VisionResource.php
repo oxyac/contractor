@@ -2,31 +2,29 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\ContractResource\Pages;
-use App\Filament\Resources\ContractResource\RelationManagers;
-use App\Models\Contract;
+use App\Filament\Resources\VisionResource\Pages;
+use App\Models\Vision;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class ContractResource extends Resource
+class VisionResource extends Resource
 {
-    protected static ?string $model = Contract::class;
+    protected static ?string $model = Vision::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-magnifying-glass';
 
+    protected static ?string $navigationLabel = 'Contract Visions';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\SpatieMediaLibraryFileUpload::make('attachments')
-                    ->multiple()
-                    ->disk('s3')
             ]);
     }
 
@@ -34,9 +32,10 @@ class ContractResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('id')
-                    ->searchable()
-                    ->sortable(),
+                TextColumn::make('attachment_count')
+                    ->state(function ($record): float {
+                        return $record->media()->count();
+                    }),
                 Tables\Columns\TextColumn::make('created_at')
                     ->searchable()
                     ->sortable(),
@@ -54,7 +53,7 @@ class ContractResource extends Resource
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
-            ])->defaultSort('id', 'desc');
+            ]);
     }
 
     public static function getRelations(): array
@@ -67,9 +66,9 @@ class ContractResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListContracts::route('/'),
-            'create' => Pages\CreateContract::route('/create'),
-            'edit' => Pages\EditContract::route('/{record}/edit'),
+            'index' => Pages\ListVisions::route('/'),
+            'create' => Pages\CreateVision::route('/create'),
+            'edit' => Pages\EditVision::route('/{record}/edit'),
         ];
     }
 }

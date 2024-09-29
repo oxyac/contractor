@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\ContractResource\Pages;
-use App\Filament\Resources\ContractResource\RelationManagers;
-use App\Models\Contract;
+use App\Filament\Resources\LegalEntityResource\Pages;
+use App\Filament\Resources\LegalEntityResource\RelationManagers;
+use App\Models\LegalEntity;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -13,20 +13,17 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class ContractResource extends Resource
+class LegalEntityResource extends Resource
 {
-    protected static ?string $model = Contract::class;
+    protected static ?string $model = LegalEntity::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\SpatieMediaLibraryFileUpload::make('attachments')
-                    ->multiple()
-                    ->disk('s3')
+                //
             ]);
     }
 
@@ -34,15 +31,7 @@ class ContractResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('id')
-                    ->searchable()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->searchable()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->searchable()
-                    ->sortable(),
+                //
             ])
             ->filters([
                 //
@@ -54,7 +43,7 @@ class ContractResource extends Resource
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
-            ])->defaultSort('id', 'desc');
+            ]);
     }
 
     public static function getRelations(): array
@@ -67,9 +56,9 @@ class ContractResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListContracts::route('/'),
-            'create' => Pages\CreateContract::route('/create'),
-            'edit' => Pages\EditContract::route('/{record}/edit'),
+            'index' => Pages\ListLegalEntities::route('/'),
+            'create' => Pages\CreateLegalEntity::route('/create'),
+            'edit' => Pages\EditLegalEntity::route('/{record}/edit'),
         ];
     }
 }
