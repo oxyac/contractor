@@ -32,6 +32,7 @@ class CreateVision extends CreateRecord
                 SpatieMediaLibraryFileUpload::make('images')
                     ->multiple()
                     ->disk('local')
+                    ->required()
             ]);
     }
 }

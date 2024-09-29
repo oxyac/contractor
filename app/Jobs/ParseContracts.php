@@ -29,8 +29,9 @@ class ParseContracts implements ShouldQueue
         foreach ($this->vision->getMedia() as $media) {
             $contract = new Contract();
             $contract->save();
+
             /* @var Media $media */
-            $contract->addMedia($media)->toMediaCollection();
+            $contract->addMedia($media);
 
             Storage::disk('local')->delete($media->getPath());
             $media->delete();

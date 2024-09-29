@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\LegalEntity;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -22,7 +23,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             CurrenciesTableSeeder::class,
             CountriesTableSeeder::class,
-
+            LegalEntitiesSeeder::class,
+            ContractsSeeder::class,
         ]);
 
 

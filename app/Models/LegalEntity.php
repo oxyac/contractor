@@ -7,5 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class LegalEntity extends Model
 {
-use HasFactory;
+    use HasFactory;
+
+    public $fillable = [
+        'name',
+        'address',
+        'phone',
+        'email',
+        'entity_type',
+        'bank_details',
+        'iban',
+    ];
 }

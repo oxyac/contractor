@@ -21,6 +21,8 @@ class VisionResource extends Resource
 
     protected static ?string $navigationLabel = 'Contract Visions';
 
+    protected static ?string $navigationGroup = 'AI';
+
     public static function form(Form $form): Form
     {
         return $form
@@ -32,6 +34,9 @@ class VisionResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('id')
+                    ->searchable()
+                    ->sortable(),
                 TextColumn::make('attachment_count')
                     ->state(function ($record): float {
                         return $record->media()->count();
@@ -53,7 +58,7 @@ class VisionResource extends Resource
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
-            ]);
+            ])->defaultSort('id', 'desc');
     }
 
     public static function getRelations(): array
