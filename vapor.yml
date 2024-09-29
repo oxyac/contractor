@@ -4,6 +4,7 @@ environments:
     production:
         storage: hackaton-2024-sendphoto
         memory: 1024
+        database: vapor
         cli-memory: 512
         runtime: 'php-8.3:al2'
         build:
