@@ -26,6 +26,7 @@ class Contract extends Model implements HasMedia
         'is_limited',
         'is_subscription',
         'is_in_rates',
+        'parse_result'
     ];
     public $casts = [
         'services' => 'array',
