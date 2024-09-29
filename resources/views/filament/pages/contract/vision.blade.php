@@ -12,9 +12,9 @@
         <p>Generate invoices for the contract.</p>
     </div>
     <form wire:submit.prevent="save">
-        <input type="file" wire:model="photos">
+        <input type="file" wire:model="photo">
 
-        @error('photos.*') <span class="error">{{ $message }}</span> @enderror
+        @error('photo') <span class="error">{{ $message }}</span> @enderror
 
         <br/>
         <br/>

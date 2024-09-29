@@ -24,35 +24,33 @@ class Vision extends Page
 
     use WithFileUploads;
 
-    public $photos = [];
+    public $photo = [];
 
     public function save()
     {
         $this->validate([
-            'photos.*' => 'file|max:2048', // 1MB Max
+            'photo' => 'required|max:10240',
         ]);
 
-        foreach ($this->photos as $photo) {
+        $contract = new Contract();
+        $contract->legal_entity_id = auth()->user()->legal_entity_id;
+        $contract->save();
 
-            $contract = new Contract();
-            $contract->legal_entity_id = auth()->user()->legal_entity_id;
-            $contract->save();
+        /* @var Media $media */
+        $contract->addMedia($this->photo[0])->toMediaCollection('default', 's3');
 
-            /* @var Media $media */
-            $contract->addMedia($photo)->toMediaCollection('default', 's3');
+        if (config('services.python.enabled')) {
+            ParseContracts::dispatch($contract);
 
-            if(config('services.python.enabled')) {
-                ParseContracts::dispatch($contract);
+            Notification::make()
+                ->title('Contract has been uploaded. Generation in progress')
+                ->color('success')
+                ->send();
 
-                Notification::make()
-                    ->title('Contract has been uploaded. Generation in progress')
-                    ->color('success')
-                    ->send();
+            return;
+        }
 
-                return;
-            }
-
-            $result = json_decode('{
+        $result = json_decode('{
    "companies": {
       "from": {
          "id": 1,
@@ -116,14 +114,13 @@ class Vision extends Page
 }
 ', true);
 
-            (new GenerateService())->generateFromResponse($contract, $result);
+        (new GenerateService())->generateFromResponse($contract, $result);
 
-            Notification::make()
-                ->title('Contract has been uploaded. Generation in progress')
-                ->color('success')
-                ->send();
+        Notification::make()
+            ->title('Contract has been uploaded. Generation in progress')
+            ->color('success')
+            ->send();
 
-        }
     }
 
 }
