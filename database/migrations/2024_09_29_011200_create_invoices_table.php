@@ -20,6 +20,9 @@ return new class extends Migration
             $table->float('product_quantity'); // Quantity of the product/service
             $table->decimal('product_price'); // Price of the product/service
             $table->decimal('total'); // Total invoice price
+
+            $table->foreignId('company_id')->constrained('companies'); // Foreign key to the company (nullable
+
             $table->timestamps(); // Created at & Updated at
         });
     }

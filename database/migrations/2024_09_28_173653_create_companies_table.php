@@ -28,8 +28,10 @@ return new class extends Migration {
             $table->foreignId('country_id')->nullable();
             $table->string('postcode')->nullable();
 
-            $table->foreignId('user_id')->constrained('users');
+        });
 
+        Schema::table('users', function (Blueprint $table) {
+            $table->foreignId('company_id')->nullable();
         });
 
     }
@@ -40,6 +42,10 @@ return new class extends Migration {
     public function down(): void
     {
 
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropForeign(['company_id']);
+            $table->dropColumn('company_id');
+        });
         Schema::dropIfExists('companies');
         Schema::dropIfExists('legal_entities');
 

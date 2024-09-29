@@ -41,6 +41,8 @@ return new class extends Migration
 
             $table->json('services')->nullable();
 
+            $table->foreignId('company_id')->constrained('companies'); // Foreign key to the company (nullable
+
             $table->timestamps();
         });
     }

@@ -13,6 +13,14 @@ class PromptRequest extends SoloRequest
 
     public function resolveEndpoint(): string
     {
-        return 'http://';
+        return 'https://contractor.oxyac.dev/upload';
+    }
+
+    public function resolveHeaders(): array
+    {
+        return [
+            'Content-Type' => 'application/json',
+            'x-api-key'=> config('services.python.key')
+            ];
     }
 }

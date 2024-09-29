@@ -32,7 +32,28 @@ class InvoiceResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('contract.toEntity.name')
+                    ->label('Payee')
+                    ->searchable()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('stage_num')
+                    ->searchable()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('due_date')
+                    ->searchable()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('product_description')
+                    ->searchable()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('product_quantity')
+                    ->searchable()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('product_price')
+                    ->searchable()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('total')
+                    ->searchable()
+                    ->sortable(),
             ])
             ->filters([
                 //

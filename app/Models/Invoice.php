@@ -8,4 +8,25 @@ use Illuminate\Database\Eloquent\Model;
 class Invoice extends Model
 {
     use HasFactory;
+
+    public $fillable = [
+        'contract_id',
+        'stage_num',
+        'due_date',
+        'product_description',
+        'product_quantity',
+        'product_price',
+        'total',
+        'company_id'
+    ];
+
+    protected $casts = [
+        'due_date' => 'datetime',
+
+    ];
+
+    public function contract()
+    {
+        return $this->belongsTo(Contract::class);
+    }
 }

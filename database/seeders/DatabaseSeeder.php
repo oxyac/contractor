@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Company;
 use App\Models\LegalEntity;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -14,11 +15,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        Company::create([
+            'name' => 'Test Company',
+        ]);
         User::factory()->create([
             'first_name' => 'Vasya',
             'last_name' => 'Pupkin',
             'email' => 'test@pupkin.com',
+            'company_id' => 1,
         ]);
+
+
 
         $this->call([
             CurrenciesTableSeeder::class,

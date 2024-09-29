@@ -4,6 +4,7 @@ namespace App\Providers\Filament;
 
 use App\Filament\Pages\Auth\Register;
 use App\Livewire\CustomPersonalInfo;
+use Filament\Enums\ThemeMode;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
@@ -48,7 +49,7 @@ class AppPanelProvider extends PanelProvider
                 'My space',
             ])
             ->plugins([
-                \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
+                \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make()   ,
                 BreezyCore::make()
                     ->myProfile(
                         shouldRegisterNavigation: true,
@@ -57,7 +58,9 @@ class AppPanelProvider extends PanelProvider
                     ->enableTwoFactorAuthentication()
                     ->myProfileComponents([
                         'personal_info' => CustomPersonalInfo::class
-                    ])
+                    ]),
+                \Hasnayeen\Themes\ThemesPlugin::make()
+
             ])
             ->middleware([
                 EncryptCookies::class,
@@ -69,10 +72,14 @@ class AppPanelProvider extends PanelProvider
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
+                \Hasnayeen\Themes\Http\Middleware\SetTheme::class
+
             ])
             ->registration(Register::class)
             ->authMiddleware([
                 Authenticate::class,
-            ]);
+            ])
+            ->defaultThemeMode(ThemeMode::Light)
+            ->brandName('Contract Vision');
     }
 }

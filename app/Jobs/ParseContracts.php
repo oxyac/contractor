@@ -17,7 +17,7 @@ class ParseContracts implements ShouldQueue
     /**
      * Create a new job instance.
      */
-    public function __construct(public Vision $vision)
+    public function __construct(public Contract $contract)
     {
     }
 
@@ -26,20 +26,6 @@ class ParseContracts implements ShouldQueue
      */
     public function handle(): void
     {
-        foreach ($this->vision->getMedia() as $media) {
-            $contract = new Contract();
-            $contract->save();
 
-            /* @var Media $media */
-            $contract->addMedia($media);
-
-            Storage::disk('local')->delete($media->getPath());
-            $media->delete();
-
-        }
-
-        Log::info('Parsing contract for vision ' . $this->vision->id, [
-            'images' => $this->vision->getMedia(),
-        ]);
     }
 }
