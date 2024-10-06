@@ -17,5 +17,6 @@ class LegalEntity extends Model
         'entity_type',
         'bank_details',
         'iban',
+        'belongs_to_legal_entity_id'
     ];
 }

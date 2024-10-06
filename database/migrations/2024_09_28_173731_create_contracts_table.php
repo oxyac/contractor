@@ -20,6 +20,7 @@ return new class extends Migration
             $table->text('address')->nullable();
             $table->text('bank_details')->nullable();
             $table->text('iban')->nullable();
+            $table->foreignId('belongs_to_legal_entity_id')->nullable()->constrained('legal_entities');
             $table->timestamps();
         });
 

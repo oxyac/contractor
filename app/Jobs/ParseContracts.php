@@ -11,11 +11,16 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use OpenAI\Laravel\Facades\OpenAI;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class ParseContracts implements ShouldQueue
 {
     use Queueable;
+
+    public $tries = 3;
+
+    public $timeout = 240   ;
 
     /**
      * Create a new job instance.
