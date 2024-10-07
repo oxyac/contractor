@@ -11,10 +11,12 @@ use Filament\Forms;
 
 class MyCompany extends Page implements HasForms
 {
-    protected static ?string $navigationIcon = 'heroicon-o-document-text';
-    protected static ?string $navigationGroup = 'Settings';
+    protected static ?string $navigationIcon = 'heroicon-o-building-office';
+    protected static ?string $navigationGroup = 'Companies';
 
     protected static string $view = 'filament.pages.profile.my-company';
+    protected static ?int $navigationSort = 3;
+
 
     use InteractsWithForms;
 

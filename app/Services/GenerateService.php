@@ -24,12 +24,16 @@ class GenerateService
         $from = LegalEntity::where('name', $response['companies']['from']['name'])->first();
         if(!$from) {
             $from = LegalEntity::create($response['companies']['from']);
+            $from->belongs_to_legal_entity_id = $contractModel->legal_entity_id;
+            $from->save();
         }
 
         $to = LegalEntity::where('name', $response['companies']['to']['name'])->first();
 
         if(!$to) {
             $to = LegalEntity::create($response['companies']['to']);
+            $to->belongs_to_legal_entity_id = $contractModel->legal_entity_id;
+            $to->save();
         }
 
         $contract = $response['contract'];

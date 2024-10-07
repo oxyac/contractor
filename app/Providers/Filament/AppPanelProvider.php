@@ -45,14 +45,13 @@ class AppPanelProvider extends PanelProvider
                 InvoiceChart::class
             ])
             ->navigationGroups([
-                'AI',
-                'My space',
+                'Documents',
+                'Companies',
             ])
             ->plugins([
                 BreezyCore::make()
                     ->myProfile(
-                        shouldRegisterNavigation: true,
-                        navigationGroup: 'Settings'
+                        shouldRegisterNavigation: false,
                     )
                     ->enableTwoFactorAuthentication()
                     ->myProfileComponents([

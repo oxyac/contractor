@@ -18,9 +18,12 @@ class LegalEntityResource extends Resource
 {
     protected static ?string $model = LegalEntity::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-building-office-2';
 
-    protected static ?string $navigationGroup = 'My space';
+    protected static ?string $navigationGroup = 'Companies';
+    protected static ?string $navigationLabel = 'All companies';
+
+    protected static ?int $navigationSort = 2;
 
     public static function form(Form $form): Form
     {

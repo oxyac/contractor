@@ -23,8 +23,8 @@ class InvoiceResource extends Resource
 {
     protected static ?string $model = Invoice::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-    protected static ?string $navigationGroup = 'My space';
+    protected static ?string $navigationIcon = 'heroicon-o-paper-airplane';
+    protected static ?string $navigationGroup = 'Documents';
 
     public static function form(Form $form): Form
     {
@@ -67,7 +67,7 @@ class InvoiceResource extends Resource
                             ->afterStateUpdated(fn (Set $set, Get $get, ?string $state) => $set('total', is_numeric($get('product_quantity')) && is_numeric( $get('product_price')) ? $get('product_quantity') * $get('product_price') : 0)),
                         Forms\Components\TextInput::make('total')
                             ->label('Total')
-                            ->disabled()
+                            ->readOnly()
                             ->numeric()
                     ])->columns(3),
 

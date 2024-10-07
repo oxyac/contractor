@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Storage;
 use OpenAI\Laravel\Facades\OpenAI;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-class ParseContracts
+class ParseContracts implements ShouldQueue
 {
     use Queueable;
 
