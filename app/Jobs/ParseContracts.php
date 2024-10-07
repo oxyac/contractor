@@ -4,23 +4,19 @@ namespace App\Jobs;
 
 use App\Http\Requests\PromptRequest;
 use App\Models\Contract;
-use App\Models\Vision;
 use App\Services\GenerateService;
 use Filament\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use OpenAI\Laravel\Facades\OpenAI;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-class ParseContracts implements ShouldQueue
+class ParseContracts
 {
     use Queueable;
-
-    public $tries = 3;
-
-    public $timeout = 240   ;
 
     /**
      * Create a new job instance.
@@ -42,7 +38,7 @@ class ParseContracts implements ShouldQueue
                 'is_parsed' => true
             ]);
 
-            if(isset($result['result'])) {
+            if (isset($result['result'])) {
 
                 (new GenerateService())->generateFromResponse($this->contract, $result['result']);
 

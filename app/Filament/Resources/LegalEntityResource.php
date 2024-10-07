@@ -83,11 +83,7 @@ class LegalEntityResource extends Resource
                 ]),
             ])->modifyQueryUsing(function (Builder $query) {
                 $query->where('id', '!=', 1);
-            })->modifyQueryUsing(
-                function (Builder $query) {
-                    $query->where('belongs_to_legal_entity_id', auth()->user()->legal_entity_id) && $query->whereNot('id', auth()->user()->legal_entity_id);
-                }
-            );
+            });
     }
 
     public static function infolist(Infolists\Infolist $infolist): Infolists\Infolist

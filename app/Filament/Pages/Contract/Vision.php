@@ -25,16 +25,21 @@ class Vision extends Page
 
     use WithFileUploads;
 
-    public $photo = [];
+    public $document;
+    public $disableSubmit = true;
 
     public function save()
     {
+        $this->validate([
+            'document' => 'file|max:2048', // 1MB Max
+        ]);
+
         $contract = new Contract();
         $contract->legal_entity_id = auth()->user()->legal_entity_id;
         $contract->save();
 
         /* @var Media $media */
-        $contract->addMedia($this->photo[0])->toMediaCollection('default', 's3');
+        $contract->addMedia($this->document)->toMediaCollection('default', 's3');
 
         if (config('services.python.enabled')) {
             ParseContracts::dispatch($contract);
@@ -120,4 +125,7 @@ class Vision extends Page
 
     }
 
+    public function uploadFinish() {
+        $this->disableSubmit = false;
+    }
 }

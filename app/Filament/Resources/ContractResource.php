@@ -149,11 +149,7 @@ class ContractResource extends Resource
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
-            ])->defaultSort('id', 'desc')->modifyQueryUsing(
-                function (Builder $query) {
-                    $query->where('legal_entity_id', auth()->user()->legal_entity_id);
-                }
-            );
+            ])->defaultSort('id', 'desc');
     }
 
     public static function getRelations(): array
@@ -171,4 +167,5 @@ class ContractResource extends Resource
             'edit' => Pages\EditContract::route('/{record}/edit'),
         ];
     }
+
 }

@@ -122,11 +122,7 @@ class InvoiceResource extends Resource
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
-            ])->modifyQueryUsing(
-                function (Builder $query) {
-                    $query->where('legal_entity_id', auth()->user()->legal_entity_id);
-                }
-            );
+            ]);
     }
 
     public static function getRelations(): array

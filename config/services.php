@@ -35,4 +35,8 @@ return [
         'enabled' => env('PYTHON_API_ENABLED', false),
     ],
 
+    'openai' => [
+        'enabled' => env('OPENAI_API_ENABLED', false),
+    ],
+
 ];

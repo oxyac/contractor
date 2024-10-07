@@ -5,9 +5,20 @@ namespace App\Services;
 use App\Filament\Resources\ContractResource;
 use App\Models\Contract;
 use App\Models\LegalEntity;
+use Carbon\Carbon;
+use PhpOffice\PhpWord\IOFactory;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class GenerateService
 {
+
+    public function extractText(Media $media) {
+//        if($media->mime_type = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') {
+//
+//            $office = IOFactory::load();
+//            dd($office);
+//        }
+    }
     public function generateFromResponse(Contract $contractModel, array $response)
     {
         $from = LegalEntity::where('name', $response['companies']['from']['name'])->first();
