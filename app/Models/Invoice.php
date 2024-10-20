@@ -6,8 +6,6 @@ use App\Models\Scopes\CompanyScope;
 use Illuminate\Database\Eloquent\Attributes\ScopedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-#[ScopedBy([CompanyScope::class])]
-
 class Invoice extends Model
 {
     use HasFactory;
@@ -31,5 +29,12 @@ class Invoice extends Model
     public function contract()
     {
         return $this->belongsTo(Contract::class);
+    }
+
+    protected static function booted(): void
+    {
+        if(auth()->user()) {
+            static::addGlobalScope(new CompanyScope());
+        }
     }
 }

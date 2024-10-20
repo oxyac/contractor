@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use App\Models\Scopes\CompanyScope;
+use App\Models\Scopes\LegalEntityScope;
+use Faker\Provider\Company;
 use Illuminate\Database\Eloquent\Attributes\ScopedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -10,7 +12,6 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
 
-#[ScopedBy([CompanyScope::class])]
 class Contract extends Model implements HasMedia
 {
     use HasFactory, InteractsWithMedia;
@@ -55,5 +56,12 @@ class Contract extends Model implements HasMedia
     public function invoices()
     {
         return $this->hasMany(Invoice::class);
+    }
+
+    protected static function booted(): void
+    {
+        if(auth()->user()) {
+            static::addGlobalScope(new CompanyScope());
+        }
     }
 }

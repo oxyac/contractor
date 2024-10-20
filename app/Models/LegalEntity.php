@@ -6,7 +6,6 @@ use App\Models\Scopes\LegalEntityScope;
 use Illuminate\Database\Eloquent\Attributes\ScopedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-#[ScopedBy([LegalEntityScope::class])]
 class LegalEntity extends Model
 {
     use HasFactory;
@@ -21,4 +20,11 @@ class LegalEntity extends Model
         'iban',
         'belongs_to_legal_entity_id'
     ];
+
+    protected static function booted(): void
+    {
+        if(auth()->user()) {
+            static::addGlobalScope(new LegalEntityScope());
+        }
+    }
 }
