@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id(); // Primary Key
             $table->foreignId('contract_id')->nullable()->constrained('contracts')->onDelete('cascade'); // Foreign key to the contract
             $table->integer('stage_num')->nullable(); // Stage number (nullable)
-            $table->timestamp('due_date'); // Invoice due date
+            $table->timestamp('due_date')->nullable(); // Invoice due date
             $table->text('product_description'); // Description of the product/service
             $table->float('product_quantity'); // Quantity of the product/service
             $table->decimal('product_price'); // Price of the product/service

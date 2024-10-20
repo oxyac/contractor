@@ -43,6 +43,8 @@ return new class extends Migration
 
             $table->json('services')->nullable();
             $table->json('parse_result')->nullable();
+            $table->text('text')->nullable();
+
 
             $table->foreignId('legal_entity_id')->constrained('legal_entities'); // Foreign key to the company (nullable
 

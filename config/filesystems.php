@@ -56,6 +56,12 @@ return [
             'throw' => false,
         ],
 
+        'temporary' => [
+            'driver' => 'local',
+            'root' => '/tmp',
+            'throw' => false,
+        ],
+
     ],
 
     /*

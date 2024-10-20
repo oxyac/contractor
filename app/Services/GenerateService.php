@@ -42,6 +42,9 @@ class GenerateService
 
         $services = [];
         foreach ($response['services'] as $item) {
+            if(!$item['description'] || !$item['quantity'] || !$item['price']) {
+                continue;
+            }
             $services[] = [
                 'description' => $item['description'],
                 'quantity' => $item['quantity'],
@@ -61,6 +64,9 @@ class GenerateService
         $contractModel->update($contract);
 
         foreach ($response['invoices'] as $item) {
+            if(!$item['CreatedAt'] || !$item['dueDate'] || !$item['productDescription'] || !$item['productQuantity'] || !$item['productPrice'] || !$item['totalPrice']) {
+                continue;
+            }
             $invoice = [
                 'created_at' => $item['CreatedAt'],
                 'due_date' => $item['dueDate'],
